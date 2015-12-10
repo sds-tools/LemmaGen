@@ -79,7 +79,8 @@ GPP=g++ $(DEBUG) -w -std=c++0x $(OPT)
 
 #####################################################################
 
-all : lemmagen \
+all : directories\
+	lemmagen \
 	lemLearn \
 	lemBuild \
 	lemmatize \
@@ -103,6 +104,9 @@ cleanbin:
 	rm -f $(BINALL)
 cleanobjects:
 	rm -f $(OBJALL)
+directories:
+	mkdir -p $(BINPATH)
+	mkdir -p $(OBJPATH)
 
 #####################################################################
 
