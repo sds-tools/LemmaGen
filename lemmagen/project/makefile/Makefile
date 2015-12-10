@@ -74,7 +74,7 @@ BINALL=\
 # add -w: inhibit all warning messages
 # add -O3: optimization
 DEBUG=
-OPT=-O3
+OPT=-O3 -fPIC  #fpic = position independent code
 GPP=g++ $(DEBUG) -w -std=c++0x $(OPT) 
 
 #####################################################################
