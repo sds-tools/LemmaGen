@@ -5,9 +5,14 @@ DEFPATH=../../source/definition
 INTPATH=../../source/interface
 OBJPATH=../../binary/linux/object
 BINPATH=../../binary/linux
-INSTALLINCLUDE= /usr/include/lemmaGen
-INSTALLSO= /usr/lib
 INSTALLSRC= ../../source
+# Standart installation path. Can be modified if you want to have the lib installed in a custom path
+#Path to all the header/ source files
+INSTALLINCLUDE= /usr/include/lemmaGen 
+
+#Path to the shared library (liblemmaGen.so)
+INSTALLSO= /usr/lib
+
 #.....................................
 
 OBJSCANNER=\
