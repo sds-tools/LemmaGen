@@ -5,7 +5,9 @@ DEFPATH=../../source/definition
 INTPATH=../../source/interface
 OBJPATH=../../binary/linux/object
 BINPATH=../../binary/linux
-
+INSTALLINCLUDE= /usr/include/lemmaGen
+INSTALLSO= /usr/lib
+INSTALLSRC= ../../source
 #.....................................
 
 OBJSCANNER=\
@@ -69,6 +71,20 @@ BINALL=\
 	$(BINPATH)/lemStat \
 
 #.....................................
+OBJLIB=\
+	$(OBJPATH)/MiscLib.o \
+	$(OBJWORDRULE) \
+	$(OBJLEARNALG) \
+	$(OBJPATH)/RdrLemmatizer.o \
+	$(OBJRDRTREE) \
+	$(OBJSCANNER) \
+	$(OBJPATH)/CmdLineParser.o \
+	$(OBJPATH)/Statistics.o \
+	$(OBJPATH)/Xval.o \
+	$(OBJINTER) \
+	$(OBJPATH)/InterAll.o
+
+#.....................................
 
 # add -g, -ggdb: debug mode
 # add -w: inhibit all warning messages
@@ -87,7 +103,8 @@ all : directories\
 	lemXval \
 	lemSplit \
 	lemTest \
-	lemStat
+	lemStat \
+	liblemmaGen.so
 
 lemmagen : $(BINPATH)/lemmagen	
 lemLearn : $(BINPATH)/lemLearn
@@ -107,7 +124,13 @@ cleanobjects:
 directories:
 	mkdir -p $(BINPATH)
 	mkdir -p $(OBJPATH)
+liblemmaGen.so: $(OBJECTS)
+	g++ -shared -o liblemmaGen.so $(OBJLIB)
 
+install:
+	mkdir $(INSTALLINCLUDE)
+	cp -a $(INSTALLSRC)/. $(INSTALLINCLUDE)
+	cp liblemmaGen.so $(INSTALLSO)
 #####################################################################
 
 $(BINPATH)/lemmagen : $(OBJPATH)/lemmagen.o
